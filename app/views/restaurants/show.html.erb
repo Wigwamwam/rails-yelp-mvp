@@ -1,0 +1,34 @@
+<h1>Information</h1>
+  <p>
+    <strong>Name:</strong>
+    <%= @restaurant.name %>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <%= @restaurant.address %>
+  </p>
+
+  <p>
+    <strong>Category:</strong>
+    <%= @restaurant.category %>
+  </p>
+
+  <% @restaurant.reviews.each do |review| %>
+    <li>
+      Stars: <%=review.rating  %> --- Comment:
+      <%=review.content %>
+      <%= link_to "Delete",
+        review_path(review),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      %>
+    </li>
+  <% end %>
+
+  <p>
+    <%= link_to 'Add Review', new_restaurant_review_path(@restaurant) %>
+  </p>
+
+  <p>
+    <%= link_to "Back to restaurants", restaurants_path %>
+  </p>
